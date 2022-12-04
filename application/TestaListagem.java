@@ -1,12 +1,12 @@
 package application;
 
 import java.sql.*;
-import java.util.List;
 
 public class TestaListagem {
     public static void main(String[] args) throws SQLException {
-        Connection connection = DriverManager
-                .getConnection("jdbc:mysql://localhost/loja_virtual?useTimeZone=true&serverTimeZone=UTC", "root", "password");
+
+        ConnectionFactory connectionFactory = new ConnectionFactory();
+        Connection connection = connectionFactory.recuperarConexao();
 
         Statement statement = connection.createStatement();
         statement.execute("SELECT ID, NOME, DESCRICAO FROM PRODUTO");
