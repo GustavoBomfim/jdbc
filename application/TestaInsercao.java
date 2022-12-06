@@ -1,7 +1,5 @@
 package application;
 
-import jdk.swing.interop.SwingInterOpUtils;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
