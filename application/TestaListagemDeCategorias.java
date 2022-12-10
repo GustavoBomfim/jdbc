@@ -1,7 +1,6 @@
 package application;
 
 import application.DAO.CategoriaDAO;
-import application.DAO.ProdutoDAO;
 import application.modelo.Categoria;
 import application.modelo.Produto;
 
@@ -14,16 +13,14 @@ public class TestaListagemDeCategorias {
 
         try(Connection connection = new ConnectionFactory().recuperarConexao()){
             CategoriaDAO categoriaDAO = new CategoriaDAO(connection);
-            List<Categoria> listaDeCategoria = categoriaDAO.listar();
+            List<Categoria> listaDeCategoria = categoriaDAO.listarComProdutos();
             listaDeCategoria.stream().forEach(ct -> {
                 System.out.println(ct.getNome());
-                try {
-                    for(Produto produto : new ProdutoDAO(connection).buscar(ct)) {
-                        System.out.println(ct.getNome() + " - " + produto.getNome());
-                    }
-                } catch (SQLException e) {
-                    e.printStackTrace();
+
+                for(Produto produto : ct.getProdutos()) {
+                    System.out.println(ct.getNome() + " - " + produto.getNome());
                 }
+
             });
         }
     }
